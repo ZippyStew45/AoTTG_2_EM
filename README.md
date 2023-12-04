@@ -1,10 +1,8 @@
-# Aottg2-Unity
+# Aottg2-Unity Expedition Addon
 [![Discord](https://img.shields.io/discord/681641241125060652.svg)](https://discord.gg/GhbNbvU)  
 
 ### About
-Aottg2 is the sequel to the original Attack on Titan Tribute Game created by FengLee. This project is currently built in Unity 2023. For more details, join our discord server: https://discord.gg/GhbNbvU.
-
-Contributing: join our discord server for more details on how to contribute. We accept applicants for a variety of work including programming, 3D modeling, texture and 2D art, sound effects, music, translation, and more.
+Aottg2 is the sequel to the original Attack on Titan Tribute Game created by FengLee. This project is currently built in Unity 2023. For more details, join the Aottg2 discord server: https://discord.gg/GhbNbvU.
 
 ### Required installs
 1. Install git: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
