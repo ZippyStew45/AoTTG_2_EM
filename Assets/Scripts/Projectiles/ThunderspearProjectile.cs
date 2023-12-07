@@ -174,12 +174,12 @@ namespace Projectiles
             }
             return damage;
         }
-		
-		//added by Sysyfus Dec 6 2023 to decouple damage from player speed, make damage proportional to titan health and affected by distance of explosion from target
-		int CalculateDamage2(var titan, float radius, var collider)
+        
+        //added by Sysyfus Dec 6 2023 to decouple damage from player speed, make damage proportional to titan health and affected by distance of explosion from target
+        int CalculateDamage2(var titan, float radius, var collider)
         {
-			float falloff = 1 - Mathf.Clamp((2f * Vector3.Distance(position, collider.transform.position) / radius), 0f, 1f); //falloff should not exceed 50%
-			int damage = (int)Mathf.Clamp((falloff * ((float)titan.GetComponent<BaseCharacter>.MaxHealth) + 100f), 10f, titan.GetComponent<BaseCharacter>.MaxHealth); //+100 to give a bit of buffer for imperfect placement, clamped to minimum 10 damage maximum of titan's health
+            float falloff = 1 - Mathf.Clamp((2f * Vector3.Distance(position, collider.transform.position) / radius), 0f, 1f); //falloff should not exceed 50%
+            int damage = (int)Mathf.Clamp((falloff * ((float)titan.GetComponent<BaseCharacter>.MaxHealth) + 100f), 10f, titan.GetComponent<BaseCharacter>.MaxHealth); //+100 to give a bit of buffer for imperfect placement, clamped to minimum 10 damage maximum of titan's health
             return damage;
         }
 
@@ -201,8 +201,8 @@ namespace Projectiles
 
         protected void FixedUpdate()
         {
-			GetComponent<Rigidbody>().velocity *= 0.98f; //added by Sysyfus Dec 6 2023 to simulate wind resistance
-			GetComponent<Rigidbody>().velocity.y -= 20f; //added by Sysyfus Dec 6 2023 to simulate gravity
+            GetComponent<Rigidbody>().velocity *= 0.98f; //added by Sysyfus Dec 6 2023 to simulate wind resistance
+            GetComponent<Rigidbody>().velocity.y -= 20f; //added by Sysyfus Dec 6 2023 to simulate gravity
             if (_photonView.IsMine)
             {
                 RaycastHit hit;
