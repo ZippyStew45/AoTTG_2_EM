@@ -1862,12 +1862,12 @@ namespace Characters
 
         protected void SetupItems()
         {
-            Items.Add(new FlareItem(this, "Green", new Color(0f, 1f, 0f, 0.7f), 10f));
-            Items.Add(new FlareItem(this, "Red", new Color(1f, 0f, 0f, 0.7f), 10f));
-            Items.Add(new FlareItem(this, "Black", new Color(0f, 0f, 0f, 0.7f), 10f));
-            Items.Add(new FlareItem(this, "Purple", new Color(153f / 255, 0f, 204f / 255, 0.7f), 10f));
-            Items.Add(new FlareItem(this, "Blue", new Color(0f, 102f / 255, 204f / 255, 0.7f), 10f));
-            Items.Add(new FlareItem(this, "Yellow", new Color(1f, 1f, 0f, 0.7f), 10f));
+            Items.Add(new FlareItem(this, "Green", new Color32(118, 182, 31, 178), 10f));
+            Items.Add(new FlareItem(this, "Red", new Color32(246, 24, 12, 178), 10f));
+            Items.Add(new FlareItem(this, "Black", new Color32(6, 9, 17, 178), 10f));
+            Items.Add(new FlareItem(this, "Purple", new Color32(195, 69, 255, 178), 10f));
+            Items.Add(new FlareItem(this, "Blue", new Color32(27, 96, 255, 178), 10f));
+            Items.Add(new FlareItem(this, "Yellow", new Color32(255, 158, 23, 178), 10f));
         }
 
         protected void SetupSpecial()
