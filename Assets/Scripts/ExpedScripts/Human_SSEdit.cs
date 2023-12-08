@@ -10,8 +10,6 @@ namespace Characters
         public float targetRadius = 10f;
         public bool RefillSS()
         {
-            if (!Grounded || State != HumanState.Idle)
-                return false;
             State = HumanState.RefillSS;
             ToggleSparks(false);
             CrossFade(HumanAnimations.Refill, 0.1f);
@@ -27,7 +25,7 @@ namespace Characters
         }
         public void FinishRefillSS()
         {
-            CurrentGas += 10f;
+            CurrentGas += 15f;
             if (CurrentGas > MaxGas)
             {
                 CurrentGas = MaxGas;
