@@ -142,7 +142,7 @@ namespace Projectiles
 
         int CalculateDamage()
         {
-            int damage = Mathf.Max((int)(InitialPlayerVelocity.magnitude * 10f *
+            int damage = Mathf.Max((int)(InitialPlayerVelocity.magnitude * 10f * 1.5f *
                 CharacterData.HumanWeaponInfo["Blade"]["DamageMultiplier"].AsFloat), 10);
             if (_owner != null && _owner is Human)
             {
