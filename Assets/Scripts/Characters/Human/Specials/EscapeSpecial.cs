@@ -10,7 +10,8 @@ namespace Characters
 
         public EscapeSpecial(BaseCharacter owner) : base(owner)
         {
-            UsesLeft = MaxUses = 1;
+            UsesLeft = MaxUses = 2;
+            Cooldown = 600;
         }
 
         public override bool CanUse()
