@@ -20,7 +20,8 @@ using Weather;
 
 namespace Characters
 {
-    class Human : BaseCharacter
+
+    internal partial class Human : BaseCharacter
     {
         // setup
         public HumanComponentCache HumanCache;
@@ -913,6 +914,14 @@ namespace Characters
                     {
                         Idle();
                         FinishRefill();
+                    }
+                }
+                else if (State == HumanState.RefillSS)
+                {
+                    if (_stateTimeLeft <= 0f)
+                    {
+                        Idle();
+                        FinishRefillSS();
                     }
                 }
                 else if (State == HumanState.Reload)
@@ -2551,7 +2560,8 @@ namespace Characters
         Run,
         Land,
         MountingHorse,
-        Stun
+        Stun,
+        RefillSS,
     }
 
     public enum HumanMountState
