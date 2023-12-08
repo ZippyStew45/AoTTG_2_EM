@@ -97,7 +97,12 @@ namespace Projectiles
                 if (Physics.SphereCast(transform.position, radius, direction.normalized, out hit, range, _blockMask))
                 {
                     if (hit.collider.transform.root.gameObject == _owner.gameObject)
+                    {
+                        if(_owner is Human)
                         ((Human)_owner).DieToTS(); //Changed from Stun to death.
+                        else
+                                 ((Human)_owner).GetStunnedByTS(transform.position);
+                    }
                 }
             }
         }
