@@ -14,7 +14,7 @@ using Cameras;
 
 namespace Projectiles
 {
-    class ThunderspearProjectile : BaseProjectile
+    internal partial class ThunderspearProjectile : BaseProjectile
     {
         Color _color;
         float _radius;
@@ -79,6 +79,7 @@ namespace Projectiles
                 EffectSpawner.Spawn(EffectPrefabs.ThunderspearExplode, transform.position, transform.rotation, effectRadius, true, new object[] { _color, killedPlayer || killedTitan });
                 StunMyHuman();
                 DestroySelf();
+                KillMyHuman();
             }
         }
 
@@ -98,10 +99,7 @@ namespace Projectiles
                 {
                     if (hit.collider.transform.root.gameObject == _owner.gameObject)
                     {
-                        //if()
-                        ((Human)_owner).DieToTS(); //Changed from Stun to death.
-                        //else
-                                 //((Human)_owner).GetStunnedByTS(transform.position);
+                        ((Human)_owner).GetStunnedByTS(transform.position);                                                      
                     }
                 }
             }
