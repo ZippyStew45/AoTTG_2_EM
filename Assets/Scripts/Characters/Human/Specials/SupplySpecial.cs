@@ -12,7 +12,7 @@ namespace Characters
 
         public SupplySpecial(BaseCharacter owner): base(owner)
         {
-            UsesLeft = MaxUses = 1;
+            UsesLeft = MaxUses = 3;
             Cooldown = 300;
         }
 
@@ -23,9 +23,10 @@ namespace Characters
 
         protected override void Deactivate()
         {
-            var rotation = _human.Cache.Transform.rotation.eulerAngles;
-            SpawnableSpawner.Spawn(SpawnablePrefabs.Supply, _human.Cache.Transform.position + _human.Cache.Transform.forward * 2f + Vector3.up * 0.5f, 
-                Quaternion.Euler(0f, rotation.y, 90f));
+            //var rotation = _human.Cache.Transform.rotation.eulerAngles;
+            //SpawnableSpawner.Spawn(SpawnablePrefabs.Supply, _human.Cache.Transform.position + _human.Cache.Transform.forward * 2f + Vector3.up * 0.5f, 
+            //    Quaternion.Euler(0f, rotation.y, 90f));
+            _human.RefillSS();
         }
 
         public override void Reset()

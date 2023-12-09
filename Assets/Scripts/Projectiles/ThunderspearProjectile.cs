@@ -14,7 +14,7 @@ using Cameras;
 
 namespace Projectiles
 {
-    class ThunderspearProjectile : BaseProjectile
+    internal partial class ThunderspearProjectile : BaseProjectile
     {
         Color _color;
         float _radius;
@@ -79,6 +79,7 @@ namespace Projectiles
                 EffectSpawner.Spawn(EffectPrefabs.ThunderspearExplode, transform.position, transform.rotation, effectRadius, true, new object[] { _color, killedPlayer || killedTitan });
                 StunMyHuman();
                 DestroySelf();
+                KillMyHuman();
             }
         }
 
@@ -97,7 +98,9 @@ namespace Projectiles
                 if (Physics.SphereCast(transform.position, radius, direction.normalized, out hit, range, _blockMask))
                 {
                     if (hit.collider.transform.root.gameObject == _owner.gameObject)
-                        ((Human)_owner).GetStunnedByTS(transform.position);
+                    {
+                        ((Human)_owner).GetStunnedByTS(transform.position);                                                      
+                    }
                 }
             }
         }
