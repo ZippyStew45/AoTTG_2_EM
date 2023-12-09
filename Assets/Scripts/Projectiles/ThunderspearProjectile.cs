@@ -177,23 +177,6 @@ namespace Projectiles
             }
             return damage;
         }
-        
-        //added by Sysyfus Dec 6 2023 to make damage proportional to titan health and affected by distance of explosion from target
-        int CalculateDamage2(BaseTitan titan, float radius, Collider collider)
-        {
-            float falloff = 1 - Mathf.Clamp( ( ((-0.75f * radius) + Vector3.Distance(this.transform.position, collider.transform.position)) / (0.5f*radius)) , 0f, 0.5f); //falloff should not exceed 50%
-            int damage = (int)(falloff * (float)titan.GetComponent<BaseCharacter>().MaxHealth /* * (1 + InitialPlayerVelocity.magnitude / 250f)*/);
-            int commonDamage = (int)(falloff * InitialPlayerVelocity.magnitude * 10f); //regular blade calculation
-            if (damage < commonDamage) //damage back to regular blade calculation if exceeds necessary damage to kill
-            {
-                damage = commonDamage;
-            }
-            if (damage < 10) //minimum 10 damage no matter what
-            {
-                damage = 10;
-            }
-            return damage;
-        }
 
         bool CheckTitanNapeAngle(Vector3 position, Transform nape)
         {
