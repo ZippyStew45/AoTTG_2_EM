@@ -175,14 +175,15 @@ namespace Projectiles
             return damage;
         }
         
-        //added by Sysyfus Dec 6 2023 to decouple damage from player speed, make damage proportional to titan health and affected by distance of explosion from target
+        //added by Sysyfus Dec 6 2023 to make damage proportional to titan health and affected by distance of explosion from target
         int CalculateDamage2(BaseTitan titan, float radius, Collider collider)
         {
-            float falloff = 1 - Mathf.Clamp((/*-0.15f * radius +*/ (Vector3.Distance(this.transform.position, collider.transform.position)) / radius), 0f, 0.5f); //falloff should not exceed 50%
-            int damage = (int)(falloff * (float)titan.GetComponent<BaseCharacter>().MaxHealth);
-            if (damage > titan.GetComponent<BaseCharacter>().MaxHealth) //damage not to exceed titan max health
+            float falloff = 1 - Mathf.Clamp( ( ((-0.75f * radius) + Vector3.Distance(this.transform.position, collider.transform.position)) / (0.5f*radius)) , 0f, 0.5f); //falloff should not exceed 50%
+            int damage = (int)(falloff * (float)titan.GetComponent<BaseCharacter>().MaxHealth /* * (1 + InitialPlayerVelocity.magnitude / 250f)*/);
+            int commonDamage = (int)(falloff * InitialPlayerVelocity.magnitude * 10f);
+            if (damage < commonDamage) //damage back to regular blade calculation if exceeds necessary damage to kill
             {
-                damage = titan.GetComponent<BaseCharacter>().MaxHealth;
+                damage = commonDamage;
             }
             if (damage < 10) //minimum 10 damage no matter what
             {
@@ -209,7 +210,7 @@ namespace Projectiles
 
         protected void FixedUpdate()
         {
-            GetComponent<Rigidbody>().velocity *= 0.95f; //added by Sysyfus Dec 6 2023 to simulate wind resistance
+            GetComponent<Rigidbody>().velocity *= 0.94f; //added by Sysyfus Dec 6 2023 to simulate wind resistance
             GetComponent<Rigidbody>().velocity -= new Vector3 (0f, 7.5f, 0f); //added by Sysyfus Dec 6 2023 to simulate gravity
             if (_photonView.IsMine)
             {
