@@ -98,10 +98,10 @@ namespace Projectiles
                 {
                     if (hit.collider.transform.root.gameObject == _owner.gameObject)
                     {
-                        if(_owner is Human)
+                        //if()
                         ((Human)_owner).DieToTS(); //Changed from Stun to death.
-                        else
-                                 ((Human)_owner).GetStunnedByTS(transform.position);
+                        //else
+                                 //((Human)_owner).GetStunnedByTS(transform.position);
                     }
                 }
             }
