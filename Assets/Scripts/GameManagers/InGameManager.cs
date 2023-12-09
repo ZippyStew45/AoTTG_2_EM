@@ -17,6 +17,7 @@ using Cameras;
 using System;
 using Photon.Pun;
 using Photon.Realtime;
+using UnityEngine.SceneManagement;
 
 namespace GameManagers
 {

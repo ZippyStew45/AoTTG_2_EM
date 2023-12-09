@@ -12,6 +12,7 @@ using CustomLogic;
 using Map;
 using Photon.Pun;
 using Photon.Realtime;
+using UnityEngine.SceneManagement;
 
 namespace UI
 {
@@ -26,6 +27,8 @@ namespace UI
         public string LocaleCategory = "CreateGamePopup";
         public bool IsMultiplayer = false;
         protected override bool UseSound => true;
+
+        private bool loadonce = false;
 
 
         public override void Setup(BasePanel parent = null)

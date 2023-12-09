@@ -16572,6 +16572,8 @@ MonoBehaviour:
   RunAnimation: 
   _attackRelease: 0
   _attackButtonRelease: 0
+  targetTag: SupplySpawnable
+  targetRadius: 10
 --- !u!114 &11414280
 MonoBehaviour:
   m_ObjectHideFlags: 0
