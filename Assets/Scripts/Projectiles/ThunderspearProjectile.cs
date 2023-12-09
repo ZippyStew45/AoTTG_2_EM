@@ -180,7 +180,7 @@ namespace Projectiles
         {
             float falloff = 1 - Mathf.Clamp( ( ((-0.75f * radius) + Vector3.Distance(this.transform.position, collider.transform.position)) / (0.5f*radius)) , 0f, 0.5f); //falloff should not exceed 50%
             int damage = (int)(falloff * (float)titan.GetComponent<BaseCharacter>().MaxHealth /* * (1 + InitialPlayerVelocity.magnitude / 250f)*/);
-            int commonDamage = (int)(falloff * InitialPlayerVelocity.magnitude * 10f);
+            int commonDamage = (int)(falloff * InitialPlayerVelocity.magnitude * 10f); //regular blade calculation
             if (damage < commonDamage) //damage back to regular blade calculation if exceeds necessary damage to kill
             {
                 damage = commonDamage;
