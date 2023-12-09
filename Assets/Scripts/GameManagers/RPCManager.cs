@@ -232,8 +232,6 @@ namespace GameManagers
 
             SceneLoader.CustomSceneLoad = true;
             SceneManager.LoadSceneAsync(SceneName, LoadSceneMode.Additive);
-
-            ChatManager.AddLine($"Scene {SceneName} Loaded!\nSent By {info.Sender.NickName.StripHex()}");
         }
 
         [PunRPC]

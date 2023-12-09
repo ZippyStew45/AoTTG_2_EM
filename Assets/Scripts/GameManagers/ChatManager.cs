@@ -267,7 +267,7 @@ namespace GameManagers
                 help += "/maxplayers [num]: Sets max players\n";
                 help += "/nextsong: Play next song in playlist\n";
                 help += "/pause: Pause the multiplayer game\n";
-                help += "/unpause: Unpause the multiplayer game";
+                help += "/unpause: Unpause the multiplayer game\n";
                 help += "/load [Scene Name]: Loads Custom Scenes";
                 AddLine(help, ChatTextColor.System);
             }
