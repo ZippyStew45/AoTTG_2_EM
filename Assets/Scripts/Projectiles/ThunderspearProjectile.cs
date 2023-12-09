@@ -127,7 +127,7 @@ namespace Projectiles
                             titan.GetHit("Thunderspear", 100, "Thunderspear", collider.name);
                         else
                         {
-                            var damage = CalculateDamage();
+                            var damage = CalculateDamage2(titan, radius, collider); //changed by Sysyfus Dec 6 2023 from CalculateDamage() to CalculateDamage2()
                             ((InGameMenu)UIManager.CurrentMenu).ShowKillScore(damage);
                             ((InGameCamera)SceneLoader.CurrentCamera).TakeSnapshot(titan.BaseTitanCache.Neck.position, damage);
                             titan.GetHit(_owner, damage, "Thunderspear", collider.name);
@@ -177,6 +177,23 @@ namespace Projectiles
             }
             return damage;
         }
+        
+        //added by Sysyfus Dec 6 2023 to make damage proportional to titan health and affected by distance of explosion from target
+        int CalculateDamage2(BaseTitan titan, float radius, Collider collider)
+        {
+            float falloff = 1 - Mathf.Clamp( ( ((-0.75f * radius) + Vector3.Distance(this.transform.position, collider.transform.position)) / (0.5f*radius)) , 0f, 0.5f); //falloff should not exceed 50%
+            int damage = (int)(falloff * (float)titan.GetComponent<BaseCharacter>().MaxHealth /* * (1 + InitialPlayerVelocity.magnitude / 250f)*/);
+            int commonDamage = (int)(falloff * InitialPlayerVelocity.magnitude * 10f); //regular blade calculation
+            if (damage < commonDamage) //damage back to regular blade calculation if exceeds necessary damage to kill
+            {
+                damage = commonDamage;
+            }
+            if (damage < 10) //minimum 10 damage no matter what
+            {
+                damage = 10;
+            }
+            return damage;
+        }
 
         bool CheckTitanNapeAngle(Vector3 position, Transform nape)
         {
@@ -196,6 +213,8 @@ namespace Projectiles
 
         protected void FixedUpdate()
         {
+            GetComponent<Rigidbody>().velocity *= 0.94f; //added by Sysyfus Dec 6 2023 to simulate wind resistance
+            GetComponent<Rigidbody>().velocity -= new Vector3 (0f, 7.5f, 0f); //added by Sysyfus Dec 6 2023 to simulate gravity
             if (_photonView.IsMine)
             {
                 RaycastHit hit;
