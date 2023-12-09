@@ -237,6 +237,22 @@ namespace GameManagers
                 if (CheckMC())
                     ((InGameManager)SceneLoader.CurrentGameManager).StartUnpauseGame();
             }
+            else if (args[0] == "load")
+            {
+                InGameGeneralSettings settings = SettingsManager.InGameCurrent.General;
+
+                if (CheckMC())
+                {
+                    if (settings.MapCategory.Value == "Custom")
+                    {
+                        RPCManager.PhotonView.RPC("LoadSceneRPC", RpcTarget.AllBuffered, new object[] { args[1] });
+                    }
+                    else
+                    {
+                        AddLine("This command only works in custom maps", ChatTextColor.System);
+                    }
+                }
+            }
             else if (args[0] == "help")
             {
                 string help = "----Command list----" + "\n";
@@ -252,6 +268,7 @@ namespace GameManagers
                 help += "/nextsong: Play next song in playlist\n";
                 help += "/pause: Pause the multiplayer game\n";
                 help += "/unpause: Unpause the multiplayer game";
+                help += "/load [Scene Name]: Loads Custom Scenes";
                 AddLine(help, ChatTextColor.System);
             }
         }

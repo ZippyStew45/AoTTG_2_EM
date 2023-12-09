@@ -9,6 +9,7 @@ using ApplicationManagers;
 using Characters;
 using Photon.Pun;
 using Spawnables;
+using UnityEngine.SceneManagement;
 
 namespace GameManagers
 {
@@ -222,6 +223,17 @@ namespace GameManagers
         public void ChatRPC(string message, PhotonMessageInfo info)
         {
             ChatManager.OnChatRPC(message, info);
+        }
+
+        [PunRPC]
+        public void LoadSceneRPC(string SceneName, PhotonMessageInfo info)
+        {
+            if (!info.Sender.IsMasterClient) return;
+
+            SceneLoader.CustomSceneLoad = true;
+            SceneManager.LoadSceneAsync(SceneName, LoadSceneMode.Additive);
+
+            ChatManager.AddLine($"Scene {SceneName} Loaded!\nSent By {info.Sender.NickName.StripHex()}");
         }
 
         [PunRPC]
