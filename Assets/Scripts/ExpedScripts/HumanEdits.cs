@@ -8,6 +8,14 @@ namespace Characters
     {
         public string targetTag = "SupplySpawnable";
         public float targetRadius = 10f;
+
+        //THUNDERSPEAR EDIT
+        public void DieToTS()
+        {
+            GetHit(this, 100, "Thunderspear", "");
+            Die();
+        }
+        //SUPPLY SPECIAL EDIT
         public bool RefillSS()
         {
             State = HumanState.RefillSS;
@@ -17,27 +25,12 @@ namespace Characters
             _stateTimeLeft = Cache.Animation[HumanAnimations.Refill].length;
             return true;
         }
-        public bool NeedRefillSS()
-        {
-            if (CurrentGas < MaxGas)
-                return true;
-            return false;
-        }
         public void FinishRefillSS()
         {
             CurrentGas += 15f;
             if (CurrentGas > MaxGas)
             {
                 CurrentGas = MaxGas;
-            }
-            GameObject target = GameObject.FindGameObjectWithTag(targetTag);
-            Vector3 currentPosition = transform.position;
-
-            float distance = Vector3.Distance(target.transform.position, currentPosition);
-
-            if (distance <= targetRadius)
-            {
-                Destroy(target);
             }
         }
     }
