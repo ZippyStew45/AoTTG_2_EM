@@ -155,6 +155,12 @@ namespace GameManagers
             if (!PhotonNetwork.OfflineMode)
                 ChatManager.AddLine("Master client has restarted the game.", ChatTextColor.System);
             SceneLoader.LoadScene(SceneName.InGame);
+
+            InGameSet settingsui = SettingsManager.InGameUI;
+            if (settingsui.General.SceneLoading.Value != "" && settingsui.General.MapCategory.Value == "Custom")
+            {
+                RPCManager.PhotonView.RPC("LoadSceneRPC", RpcTarget.AllBuffered, new object[] { settingsui.General.SceneLoading.Value });
+            }
         }
 
         public static void OnPreRestartGameRPC(bool immediate, PhotonMessageInfo info)
@@ -200,6 +206,13 @@ namespace GameManagers
                 ChatManager.AddLine("Welcome to " + PhotonNetwork.CurrentRoom.GetStringProperty(RoomProperty.Name).Trim() + ". \nType /help for a list of commands.", 
                     ChatTextColor.System);
             SceneLoader.LoadScene(SceneName.InGame);
+
+            if (!PhotonNetwork.IsMasterClient) return;
+            InGameSet settingsui = SettingsManager.InGameUI;
+            if (settingsui.General.SceneLoading.Value != "" && settingsui.General.MapCategory.Value == "Custom")
+            {
+                RPCManager.PhotonView.RPC("LoadSceneRPC", RpcTarget.AllBuffered, new object[] { settingsui.General.SceneLoading.Value });
+            }
         }
 
         public void RegisterMainCharacterDie()

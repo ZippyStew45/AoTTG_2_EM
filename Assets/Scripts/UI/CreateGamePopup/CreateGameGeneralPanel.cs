@@ -50,6 +50,10 @@ namespace UI
             {
                 ElementFactory.CreateDropdownSetting(DoublePanelLeft, dropdownStyle, settings.General.MapName, UIManager.GetLocale(cat, sub, "MapName"),
                mapNames, elementWidth: 180f, optionsWidth: 300f, onDropdownOptionSelect: () => parent.RebuildCategoryPanel());
+                if (settings.General.MapCategory.Value == "Custom")
+                {
+                    ElementFactory.CreateInputSetting(DoublePanelLeft, dropdownStyle, settings.General.SceneLoading, "Scene Name", elementWidth: 180f);
+                }
                 ElementFactory.CreateDefaultLabel(DoublePanelLeft, dropdownStyle, script.Options.Description, alignment: TextAnchor.MiddleLeft);
             }
             ElementFactory.CreateDropdownSetting(DoublePanelRight, dropdownStyle, settings.General.GameMode, UIManager.GetLocale(cat, sub, "GameMode"),
