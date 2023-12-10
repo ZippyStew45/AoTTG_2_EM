@@ -198,10 +198,11 @@ namespace Projectiles
         protected void FixedUpdate()
         {
             GetComponent<Rigidbody>().velocity *= 0.94f; //added by Sysyfus Dec 6 2023 to simulate wind resistance
-            if(_photonView.IsMine && gravity)
-            GetComponent<Rigidbody>().velocity -= new Vector3 (0f, 7.5f, 0f); //added by Sysyfus Dec 6 2023 to simulate gravity
             if (_photonView.IsMine)
             {
+                if (gravity)
+                    GetComponent<Rigidbody>().velocity -= new Vector3(0f, 7.5f, 0f); //added by Sysyfus Dec 6 2023 to simulate gravity
+            
                 RaycastHit hit;
                 Vector3 direction = (transform.position - _lastPosition);
                 if (Physics.SphereCast(_lastPosition, 0.5f, direction.normalized, out hit, direction.magnitude, _collideMask))
