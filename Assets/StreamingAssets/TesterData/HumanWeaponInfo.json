@@ -13,7 +13,7 @@
 		"StunBlockRadius": 2,
 		"StunDuration": 0.8,
 		"StunGasPenalty": 0.15,
-		"StunForce": 100,
+		"StunForce": 20,
 		"CD": 0.8,
 		"Delay": 0.12,
 		"AmmoRound": 2,
