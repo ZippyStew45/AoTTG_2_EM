@@ -71,7 +71,7 @@ namespace Projectiles
         {
             if (!Disabled)
             {
-                float effectRadius = _radius * 4f;
+                float effectRadius = _radius * 5f;
                 if (SettingsManager.InGameCurrent.Misc.ThunderspearPVP.Value)
                     effectRadius = _radius * 2f;
                 bool killedPlayer = KillPlayersInRadius(_radius);
