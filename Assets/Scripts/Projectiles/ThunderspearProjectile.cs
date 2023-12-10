@@ -71,6 +71,7 @@ namespace Projectiles
         {
             if (!Disabled)
             {
+                var trail = transform.Find("Trail").GetComponent<ParticleSystem>();
                 float effectRadius = _radius * 5f;
                 if (SettingsManager.InGameCurrent.Misc.ThunderspearPVP.Value)
                     effectRadius = _radius * 2f;
@@ -80,6 +81,7 @@ namespace Projectiles
                 StunMyHuman();
                 DestroySelf();
                 KillMyHuman();
+                trail.Stop();
             }
         }
 
