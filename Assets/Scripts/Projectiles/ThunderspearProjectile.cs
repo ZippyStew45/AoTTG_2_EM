@@ -71,7 +71,7 @@ namespace Projectiles
         {
             if (!Disabled)
             {
-                var trail = transform.Find("Trail").GetComponent<ParticleSystem>();
+                var trail = transform.Find("Trail").GetComponent<ParticleSystem>(); //Added by Momo Dec 10 2023 to stop emission on explode.
                 float effectRadius = _radius * 5f;
                 if (SettingsManager.InGameCurrent.Misc.ThunderspearPVP.Value)
                     effectRadius = _radius * 2f;
@@ -80,8 +80,8 @@ namespace Projectiles
                 EffectSpawner.Spawn(EffectPrefabs.ThunderspearExplode, transform.position, transform.rotation, effectRadius, true, new object[] { _color, killedPlayer || killedTitan });
                 StunMyHuman();
                 DestroySelf();
-                KillMyHuman();
-                trail.Stop();
+                KillMyHuman(); //Added by Momo Dec 6 2023 to kill people too close to the explosion.
+                trail.Stop(); //Added by Momo Dec 10 2023 to stop emission on explode.
             }
         }
 

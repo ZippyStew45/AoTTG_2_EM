@@ -10,12 +10,12 @@ namespace Characters
         public float targetRadius = 10f;
 
         //THUNDERSPEAR EDIT
-        public void DieToTS()
+        public void DieToTS() //Added by Momo Dec 6 2023 to kill people too close to the explosion. and print 100 damage.
         {
             GetHit(this, 100, "Thunderspear", "");
             Die();
         }
-        //SUPPLY SPECIAL EDIT
+        //SUPPLY SPECIAL EDIT //Added by Momo Dec 5 2023 to use a seperate refill for supply special.
         public bool RefillSS()
         {
             State = HumanState.RefillSS;
@@ -25,7 +25,7 @@ namespace Characters
             _stateTimeLeft = Cache.Animation[HumanAnimations.Refill].length;
             return true;
         }
-        public void FinishRefillSS()
+        public void FinishRefillSS() //Added by Momo Dec 5 2023 to use a seperate refill for supply special.
         {
             CurrentGas += 15f;
             if (CurrentGas > MaxGas)

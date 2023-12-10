@@ -12,7 +12,7 @@ namespace Characters
 
         public SupplySpecial(BaseCharacter owner): base(owner)
         {
-            UsesLeft = MaxUses = 3;
+            UsesLeft = MaxUses = 3; //Changed by Momo Dec 7 2023 to use a seperate refill for supply special.
             Cooldown = 300;
         }
 
@@ -23,10 +23,7 @@ namespace Characters
 
         protected override void Deactivate()
         {
-            //var rotation = _human.Cache.Transform.rotation.eulerAngles;
-            //SpawnableSpawner.Spawn(SpawnablePrefabs.Supply, _human.Cache.Transform.position + _human.Cache.Transform.forward * 2f + Vector3.up * 0.5f, 
-            //    Quaternion.Euler(0f, rotation.y, 90f));
-            _human.RefillSS();
+            _human.RefillSS(); //Added by Momo Dec 5 2023 to use stop supply can from spawning and skip straight to refill.
         }
 
         public override void Reset()
