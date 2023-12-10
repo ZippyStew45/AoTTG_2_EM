@@ -11,6 +11,7 @@ using UI;
 using Utility;
 using CustomLogic;
 using Cameras;
+using Photon.Pun;
 
 namespace Projectiles
 {
@@ -66,12 +67,10 @@ namespace Projectiles
         {
             Explode();
         }
-
         public void Explode()
         {
             if (!Disabled)
             {
-                var trail = transform.Find("Trail").GetComponent<ParticleSystem>(); //Added by Momo Dec 10 2023 to stop emission on explode.
                 float effectRadius = _radius * 5f;
                 if (SettingsManager.InGameCurrent.Misc.ThunderspearPVP.Value)
                     effectRadius = _radius * 2f;
@@ -81,7 +80,7 @@ namespace Projectiles
                 StunMyHuman();
                 DestroySelf();
                 KillMyHuman(); //Added by Momo Dec 6 2023 to kill people too close to the explosion.
-                trail.Stop(); //Added by Momo Dec 10 2023 to stop emission on explode.
+                gravity = false;
             }
         }
 
@@ -199,6 +198,7 @@ namespace Projectiles
         protected void FixedUpdate()
         {
             GetComponent<Rigidbody>().velocity *= 0.94f; //added by Sysyfus Dec 6 2023 to simulate wind resistance
+            if(_photonView.IsMine && gravity)
             GetComponent<Rigidbody>().velocity -= new Vector3 (0f, 7.5f, 0f); //added by Sysyfus Dec 6 2023 to simulate gravity
             if (_photonView.IsMine)
             {

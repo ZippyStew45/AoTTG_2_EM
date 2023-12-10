@@ -8,6 +8,7 @@ namespace Projectiles
 {
     internal partial class ThunderspearProjectile : BaseProjectile
     {
+        bool gravity = true;
         void KillMyHuman()
         {
             if (_owner == null || !(_owner is Human) || !_owner.IsMainCharacter())
