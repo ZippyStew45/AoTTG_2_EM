@@ -25,6 +25,14 @@
 		{"Name": "dakros_armored_fist", "Volume": 1},
 		{"Name": "dakros_battle_chant", "Volume": 1},
 		{"Name": "dakros_colossal", "Volume": 1}
+		{"Name": "hiroyuki_bodymotion", "Volume": 1}
+		{"Name": "hiroyuki_ackerman", "Volume": 1}
+		{"Name": "hiroyuki_appleseed", "Volume": 1}
+		{"Name": "hiroyuki_suspense", "Volume": 1}
+		{"Name": "hiroyuki_doa", "Volume": 1}
+		{"Name": "hiroyuki_barricades", "Volume": 1}
+		{"Name": "hiroyuki_attackontitan", "Volume": 1}
+		{"Name": "hiroyuki_reluctantheroes", "Volume": 1}
 	],
 	"Boss": [
 		{"Name": "dakros_shrill_voices", "Volume": 1},
@@ -34,6 +42,8 @@
 		{"Name": "meownist_hesitation", "Volume": 1},
 		{"Name": "meownist_more_battle", "Volume": 1},
 		{"Name": "meownist_annie", "Volume": 1}
+		{"Name": "hiroyuki_beforelightsout", "Volume": 1}
+		{"Name": "hiroyuki_xltt", "Volume": 1}
 	],
 	"Racing": [
 		{"Name": "meownist_ragakou_drift", "Volume": 1},
