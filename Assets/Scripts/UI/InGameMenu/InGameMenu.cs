@@ -27,6 +27,7 @@ namespace UI
         public ChatPanel ChatPanel;
         public FeedPanel FeedPanel;
         public BasePopup _settingsPopup;
+        public BasePopup _rolesPopup;
         public BasePopup _createGamePopup;
         public BasePopup _pausePopup;
         public BasePopup _characterPopup;
