@@ -57,7 +57,9 @@ namespace Projectiles
                     GetComponent<Rigidbody>().velocity = GetComponent<Rigidbody>().velocity.normalized * _velocity.magnitude * CharacterData.HumanWeaponInfo["Thunderspear"]["RicochetSpeed"].AsFloat;
                 else
                 {
-                    Explode();
+                    //Explode();
+                    if(!attached)
+                        Attach(collision);
                     _rigidbody.velocity = Vector3.zero;
                 }
             }
@@ -128,10 +130,12 @@ namespace Projectiles
                             titan.GetHit("Thunderspear", 100, "Thunderspear", collider.name);
                         else
                         {
-                            var damage = CalculateDamage2(titan, radius, collider); //changed by Sysyfus Dec 6 2023 from CalculateDamage() to CalculateDamage2()
+                            var damage = CalculateDamage3(titan, radius, collider); //changed by Sysyfus Dec 20 2023 to CalculateDamage3 //changed by Sysyfus Dec 6 2023 from CalculateDamage() to CalculateDamage2()
                             ((InGameMenu)UIManager.CurrentMenu).ShowKillScore(damage);
                             ((InGameCamera)SceneLoader.CurrentCamera).TakeSnapshot(titan.BaseTitanCache.Neck.position, damage);
-                            titan.GetHit(_owner, damage, "Thunderspear", collider.name);
+                            //titan.GetHit(_owner, damage, "Thunderspear", collider.name); //removed by Sysyfus Dec 20 2023 to accommodate accuracy tier damage
+                            AdjustTitanHealth(titan, damage, collider); //Added by Sysyfus Dec 20 2023 to accommodate accuracy tier damage
+                            //titan.SetCurrentHealth(0); //added by Sysyfus Dec 13 2023 to kill titan regardless of damage
                         }
                         killedTitan = true;
                     }
@@ -197,19 +201,26 @@ namespace Projectiles
 
         protected void FixedUpdate()
         {
-            GetComponent<Rigidbody>().velocity *= 0.94f; //added by Sysyfus Dec 6 2023 to simulate wind resistance
+            
             if (_photonView.IsMine)
             {
-                if (gravity)
-                    GetComponent<Rigidbody>().velocity -= new Vector3(0f, 3.2f, 0f); //added by Sysyfus Dec 6 2023 to simulate gravity
-            
-                RaycastHit hit;
-                Vector3 direction = (transform.position - _lastPosition);
-                if (Physics.SphereCast(_lastPosition, 0.5f, direction.normalized, out hit, direction.magnitude, _collideMask))
+                if (!attached)
                 {
-                    transform.position = hit.point;
+                    GetComponent<Rigidbody>().velocity *= 0.94f; //added by Sysyfus Dec 6 2023 to simulate wind resistance
+                    if (gravity)
+                        GetComponent<Rigidbody>().velocity -= new Vector3(0f, 3.2f, 0f); //added by Sysyfus Dec 6 2023 to simulate gravity
+
+                    RaycastHit hit;
+                    Vector3 direction = (transform.position - _lastPosition);
+                    if (Physics.SphereCast(_lastPosition, 0.5f, direction.normalized, out hit, direction.magnitude, _collideMask))
+                    {
+                        transform.position = hit.point;
+                        Attach(hit);
+                    }
+                    _lastPosition = transform.position;
                 }
-                _lastPosition = transform.position;
+                else
+                    transform.position = GetAttachedPosition(); //Changed by Sysyfus Dec 20 2023 for sticky TS
             }
         }
     }
