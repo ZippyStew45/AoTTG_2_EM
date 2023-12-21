@@ -19,6 +19,7 @@ namespace Projectiles
         GameObject attachParent = null;
         Collider attachCollider = null;
         Vector3 relativeAttachPoint = new Vector3(0f,0f,0f);
+        AudioSource tsCharge;
 
         void KillMyHuman()
         {
@@ -125,9 +126,10 @@ namespace Projectiles
             relativeAttachPoint = attachCollider.transform.InverseTransformPoint(point);
             //transform.position = attachCollider.transform.position + relativeAttachPoint;
             transform.position = attachCollider.transform.TransformPoint(relativeAttachPoint);
-            
-            //transform.SetParent(attachCollider.transform);
 
+            //transform.SetParent(attachCollider.transform);;
+            tsCharge = GetComponent<AudioSource>();
+            tsCharge.Play();
             attached = true;
 
         }
@@ -139,7 +141,8 @@ namespace Projectiles
             attachParent = hit.collider.gameObject;
             relativeAttachPoint = attachParent.transform.position - hit.point;
             transform.position = attachParent.transform.position + relativeAttachPoint;
-
+            tsCharge = GetComponent<AudioSource>();
+            tsCharge.Play();
             attached = true;
 
         }
