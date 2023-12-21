@@ -50,7 +50,7 @@ namespace Projectiles
             int commonDamage = (int)(falloff * InitialPlayerVelocity.magnitude * 10f); //regular blade calculation
             if (damage < commonDamage) //damage back to regular blade calculation if exceeds necessary damage to kill
             {
-                //damage = commonDamage; //comment out for fall off and damage tier testing
+                //damage = commonDamage; //commented out for fall off and damage tier testing
             }
             if (damage < 10) //minimum 10 damage no matter what
             {
