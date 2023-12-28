@@ -70,10 +70,29 @@ namespace Projectiles
                 if (human.CustomDamageEnabled)
                     return human.CustomDamage;
             }
+            //falloff = 1 - Mathf.Clamp((((-0.63f * radius) + Vector3.Distance(this.transform.position, collider.transform.position)) / (0.49333f * radius)), 0f, 0.75f); //falloff should not exceed 75%
             falloff = 1 - Mathf.Clamp((((-0.63f * radius) + Vector3.Distance(this.transform.position, collider.transform.position)) / (0.49333f * radius)), 0f, 0.75f); //falloff should not exceed 75%
             damage = (int)((float)damage * falloff);
             if (damage < 10)
                 damage = 10;
+            return damage;
+        }
+        int CalculateDamage4(BaseTitan titan, float radius, Collider collider)
+        {
+            int damage = Mathf.Max((int)(InitialPlayerVelocity.magnitude * 10f *
+                CharacterData.HumanWeaponInfo["Thunderspear"]["DamageMultiplier"].AsFloat), 100);
+            if (_owner != null && _owner is Human)
+            {
+                var human = (Human)_owner;
+                if (human.CustomDamageEnabled)
+                    return human.CustomDamage;
+            }
+            
+            float distanceRatio = Vector3.Distance(this.transform.position, collider.transform.position) / radius; //how far hit point is from nape relative to explosion radius
+            falloff = Mathf.Clamp(   -1f*Mathf.Pow(1.25f*distanceRatio, 2) + 2.0625f   , 0.5f, 1.5f); //falloff should not exceed +-50%, +50% at 0.6 distance ratio and -50% at 1.0 distance ratio
+            
+            damage = (int)((float)damage * falloff);
+
             return damage;
         }
 
@@ -117,7 +136,7 @@ namespace Projectiles
         //added by Sysyfus Dec 20 2023 to make TS stick to surface before exploding
         void Attach(Collision collision)
         {
-            this._timeLeft = 1f; //TS explodes after 1 second
+            //this._timeLeft = 1f; //TS explodes after 1 second
 
             attachParent = collision.collider.gameObject;
             attachCollider = collision.collider;
@@ -135,7 +154,7 @@ namespace Projectiles
         }
         void Attach(RaycastHit hit)
         {
-            this._timeLeft = 1f; //TS explodes after 1 second
+            //this._timeLeft = 1f; //TS explodes after 1 second
 
 
             attachParent = hit.collider.gameObject;

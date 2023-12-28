@@ -57,7 +57,7 @@ namespace Projectiles
                     GetComponent<Rigidbody>().velocity = GetComponent<Rigidbody>().velocity.normalized * _velocity.magnitude * CharacterData.HumanWeaponInfo["Thunderspear"]["RicochetSpeed"].AsFloat;
                 else
                 {
-                    //Explode();
+                    //Explode(); //removed by Sysyfus Dec 20 2023 for sticky TS
                     if(!attached)
                         Attach(collision);
                     _rigidbody.velocity = Vector3.zero;
@@ -130,11 +130,11 @@ namespace Projectiles
                             titan.GetHit("Thunderspear", 100, "Thunderspear", collider.name);
                         else
                         {
-                            var damage = CalculateDamage3(titan, radius, collider); //changed by Sysyfus Dec 20 2023 to CalculateDamage3 //changed by Sysyfus Dec 6 2023 from CalculateDamage() to CalculateDamage2()
+                            var damage = CalculateDamage4(titan, radius, collider); //changed by Sysyfus Dec 21 2023 to CalculateDamage4 //changed by Sysyfus Dec 20 2023 to CalculateDamage3 //changed by Sysyfus Dec 6 2023 from CalculateDamage() to CalculateDamage2()
                             ((InGameMenu)UIManager.CurrentMenu).ShowKillScore(damage);
                             ((InGameCamera)SceneLoader.CurrentCamera).TakeSnapshot(titan.BaseTitanCache.Neck.position, damage);
-                            //titan.GetHit(_owner, damage, "Thunderspear", collider.name); //removed by Sysyfus Dec 20 2023 to accommodate accuracy tier damage
-                            AdjustTitanHealth(titan, damage, collider); //Added by Sysyfus Dec 20 2023 to accommodate accuracy tier damage
+                            titan.GetHit(_owner, damage, "Thunderspear", collider.name); //removed by Sysyfus Dec 20 2023 to accommodate accuracy tier damage
+                            //AdjustTitanHealth(titan, damage, collider); //Added by Sysyfus Dec 20 2023 to accommodate accuracy tier damage
                             //titan.SetCurrentHealth(0); //added by Sysyfus Dec 13 2023 to kill titan regardless of damage
                         }
                         killedTitan = true;
