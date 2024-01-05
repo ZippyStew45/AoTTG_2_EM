@@ -89,7 +89,7 @@ namespace Projectiles
             }
             
             float distanceRatio = Vector3.Distance(this.transform.position, collider.transform.position) / radius; //how far hit point is from nape relative to explosion radius
-            falloff = Mathf.Clamp(   -1f*Mathf.Pow(1.25f*distanceRatio, 2) + 2.0625f   , 0.5f, 1.5f); //falloff should not exceed +-50%, +50% at 0.6 distance ratio and -50% at 1.0 distance ratio
+            falloff = Mathf.Clamp(   -1f*Mathf.Pow(1.1f*distanceRatio, 2) + 2.0625f   , 0.5f, 1.5f); //falloff should not exceed +-50%, +50% at 0.6 distance ratio and -50% at 1.0 distance ratio
             
             damage = (int)((float)damage * falloff);
 
@@ -136,7 +136,7 @@ namespace Projectiles
         //added by Sysyfus Dec 20 2023 to make TS stick to surface before exploding
         void Attach(Collision collision)
         {
-            //this._timeLeft = 1f; //TS explodes after 1 second
+            this._timeLeft = 1f; //TS explodes after 1 second
 
             attachParent = collision.collider.gameObject;
             attachCollider = collision.collider;
