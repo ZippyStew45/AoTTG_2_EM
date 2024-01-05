@@ -113,6 +113,8 @@ MonoBehaviour:
   - SpawnSpawnableRPC
   - LoadSceneRPC
   - Explode
+  - PlayChargeEffectRPC
+  - StopChargeEffectRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

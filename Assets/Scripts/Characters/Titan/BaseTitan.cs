@@ -13,6 +13,7 @@ using Settings;
 using Photon.Pun;
 using Photon.Realtime;
 
+//edited by sysyfus dec 27 2023
 namespace Characters
 {
     abstract class BaseTitan : BaseCharacter
@@ -455,6 +456,7 @@ namespace Characters
             if (IsMine())
             {
                 CheckGround();
+                CheckUnderTerrain(); //added by Sysyfus Dec 27 2023
                 if (State == TitanState.Jump)
                 {
                     if (Cache.Rigidbody.velocity.y <= 0f)
@@ -551,6 +553,35 @@ namespace Characters
             {
                 Grounded = false;
                 _currentGroundDistance = GroundDistance;
+            }
+        }
+
+        //added by Sysyfus Dec 27 2023
+        private float terrainchecktime = 0f;
+        private void CheckUnderTerrain()
+        {
+            terrainchecktime -= Time.deltaTime;
+            if (terrainchecktime <= 0)
+            {
+                var hitArr = Physics.RaycastAll(Cache.Transform.position + (Vector3.up * 50f), Vector3.down, 49f);
+                if (hitArr.Length > 0)
+                {
+                    foreach (RaycastHit hit in hitArr)
+                    {
+                        if (hit.collider.GetComponent<TerrainCollider>() != null)
+                        {
+                            Vector3 newpos = hit.point + new Vector3(0f, 2f, 0f);
+                            //ChatManager.SendChatAll("NP: " + newpos.ToString());
+                            if (newpos.ToString().Contains("NaN") == false && (newpos - Cache.Transform.position).magnitude < 50f)
+                            {
+                                Cache.Transform.position = newpos;
+                                terrainchecktime = 10f;
+                            }
+
+                            break;
+                        }
+                    }
+                }
             }
         }
 
