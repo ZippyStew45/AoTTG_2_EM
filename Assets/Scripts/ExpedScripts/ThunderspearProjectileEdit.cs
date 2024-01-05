@@ -147,21 +147,21 @@ namespace Projectiles
             transform.position = attachCollider.transform.TransformPoint(relativeAttachPoint);
 
             //transform.SetParent(attachCollider.transform);;
-            tsCharge = GetComponent<AudioSource>();
-            tsCharge.Play();
+
+            photonView.RPC("PlayChargeEffectRPC", RpcTarget.AllViaServer, new object [0]);
+
             attached = true;
 
         }
         void Attach(RaycastHit hit)
         {
-            //this._timeLeft = 1f; //TS explodes after 1 second
+            this._timeLeft = 1f; //TS explodes after 1 second
 
 
             attachParent = hit.collider.gameObject;
             relativeAttachPoint = attachParent.transform.position - hit.point;
             transform.position = attachParent.transform.position + relativeAttachPoint;
-            tsCharge = GetComponent<AudioSource>();
-            tsCharge.Play();
+            photonView.RPC("PlayChargeEffectRPC", RpcTarget.AllViaServer, new object[0]);
             attached = true;
 
         }
@@ -173,5 +173,14 @@ namespace Projectiles
             //return attachCollider.transform.position + relativeAttachPoint;
         }
 
+        [PunRPC] public void PlayChargeEffectRPC(PhotonMessageInfo info)
+        {
+            tsCharge.Play();
+        }
+        [PunRPC]
+        public void StopChargeEffectRPC(PhotonMessageInfo info)
+        {
+            tsCharge.Stop();
+        }
     }
 }

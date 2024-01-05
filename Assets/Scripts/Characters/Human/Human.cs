@@ -1855,7 +1855,7 @@ namespace Characters
                     var tsInfo = CharacterData.HumanWeaponInfo["Thunderspear"];
                     float travelTime = tsInfo["Range"].AsFloat / tsInfo["Speed"].AsFloat;
                     Weapon = new ThunderspearWeapon(this, tsInfo["AmmoTotal"].AsInt, tsInfo["AmmoRound"].AsInt, tsInfo["CD"].AsFloat, tsInfo["Radius"].AsFloat,
-                        tsInfo["Speed"].AsFloat, travelTime + 1f, tsInfo["Delay"].AsFloat); //changed by Sysyfus Dec 21 2023 added 1 second travel time
+                        tsInfo["Speed"].AsFloat, travelTime, tsInfo["Delay"].AsFloat);
                 }
             }
         }

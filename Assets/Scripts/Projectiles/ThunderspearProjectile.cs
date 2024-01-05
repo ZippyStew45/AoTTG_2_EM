@@ -38,6 +38,7 @@ namespace Projectiles
             var trail = transform.Find("Trail").GetComponent<ParticleSystem>();
             var flame = transform.Find("Flame").GetComponent<ParticleSystem>();
             var model = transform.Find("ThunderspearModel").gameObject;
+            tsCharge = GetComponent<AudioSource>(); //added by Sysyfus Jan 4 2024
             _hideObjects.Add(flame.gameObject);
             _hideObjects.Add(model);
             if (SettingsManager.AbilitySettings.ShowBombColors.Value)
@@ -82,6 +83,7 @@ namespace Projectiles
                 StunMyHuman();
                 DestroySelf();
                 KillMyHuman(); //Added by Momo Dec 6 2023 to kill people too close to the explosion.
+                photonView.RPC("StopChargeEffectRPC", RpcTarget.AllViaServer, new object[0]); //Added by Sysyfus Jan 4 2024
                 gravity = false;
             }
         }
