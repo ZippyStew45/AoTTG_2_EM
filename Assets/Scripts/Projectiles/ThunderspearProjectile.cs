@@ -132,7 +132,7 @@ namespace Projectiles
                             titan.GetHit("Thunderspear", 100, "Thunderspear", collider.name);
                         else
                         {
-                            var damage = CalculateDamage4(titan, radius, collider); //changed by Sysyfus Dec 21 2023 to CalculateDamage4 //changed by Sysyfus Dec 20 2023 to CalculateDamage3 //changed by Sysyfus Dec 6 2023 from CalculateDamage() to CalculateDamage2()
+                            var damage = CalculateDamage5(titan, radius, collider); //changed by Sysyfus Jan 5 2024 to CalculateDamage5 //changed by Sysyfus Dec 21 2023 to CalculateDamage4 //changed by Sysyfus Dec 20 2023 to CalculateDamage3 //changed by Sysyfus Dec 6 2023 from CalculateDamage() to CalculateDamage2()
                             ((InGameMenu)UIManager.CurrentMenu).ShowKillScore(damage);
                             ((InGameCamera)SceneLoader.CurrentCamera).TakeSnapshot(titan.BaseTitanCache.Neck.position, damage);
                             titan.GetHit(_owner, damage, "Thunderspear", collider.name); //removed by Sysyfus Dec 20 2023 to accommodate accuracy tier damage

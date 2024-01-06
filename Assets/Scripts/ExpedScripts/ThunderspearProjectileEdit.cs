@@ -95,6 +95,34 @@ namespace Projectiles
 
             return damage;
         }
+        int CalculateDamage5(BaseTitan titan, float radius, Collider collider)
+        {
+            int damage = Mathf.Max((int)(InitialPlayerVelocity.magnitude * 10f *
+                CharacterData.HumanWeaponInfo["Thunderspear"]["DamageMultiplier"].AsFloat), 100);
+            if (_owner != null && _owner is Human)
+            {
+                var human = (Human)_owner;
+                if (human.CustomDamageEnabled)
+                    return human.CustomDamage;
+            }
+
+            float distanceRatio = Vector3.Distance(this.transform.position, collider.transform.position) / radius; //how far hit point is from nape relative to explosion radius
+            float critRadius = Mathf.Clamp(     (titan.Size * 0.15f) + 0.02f    , 0f, 1f); //distance ratio within which mazimum damage is achieved, proportional to titan size due to nape hitbox being embedded within titan
+            float falloffSlope = -1.17f / (1f - critRadius); //adjusts to ensure falloff reaches maximum and minimum values at appropriate distance ratios
+            //falloff should not exceed +50% or -67%, +50% within crit radius and -67% at 1.0 distance ratio
+            if (distanceRatio > critRadius)
+            {
+                falloff = Mathf.Clamp(     falloffSlope * (distanceRatio - critRadius) + 1.5f     , 0.33f, 1.5f);
+            }
+            else
+            {
+                falloff = 1.5f;
+            }
+
+            damage = (int)((float)damage * falloff);
+
+            return damage;
+        }
 
         //added by Sysyfus Dec 20 2023
         //when raw damage insufficient to kill titan, hidden bonus damage may apply based on quality of aim
@@ -136,7 +164,7 @@ namespace Projectiles
         //added by Sysyfus Dec 20 2023 to make TS stick to surface before exploding
         void Attach(Collision collision)
         {
-            //this._timeLeft = 1f; //TS explodes after 1 second
+            this._timeLeft = 1f; //TS explodes after 1 second
 
             attachParent = collision.collider.gameObject;
             attachCollider = collision.collider;
