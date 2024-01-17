@@ -14,5 +14,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BiomeTestScene.unity
     guid: 0b55ef9c8914eca458fade84e81f93da
+  - enabled: 1
+    path: Assets/Scenes/LakeScene.unity
+    guid: a738788489f90934ebc8f9bcbef3b80e
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

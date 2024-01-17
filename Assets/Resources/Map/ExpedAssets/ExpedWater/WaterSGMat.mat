@@ -38,19 +38,19 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
-    - _Absorption_Coefficient: 1.65
+    - _Absorption_Coefficient: 0.1
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
     - _Depth: 2.83
-    - _RippleDensity: 40.33
+    - _RippleDensity: 300
     - _RippleSlimness: 9.21
     - _RippleSpeed: 1
     - _Water_Alpha: 38.84
-    - _WaveDensity: 3.93
-    - _WaveSpeed: 0.07
-    - _WaveStrength: 0.05
+    - _WaveDensity: 500
+    - _WaveSpeed: 0.001
+    - _WaveStrength: 2
     m_Colors:
     - _Absorption_Color: {r: 0.5377358, g: 0.32715544, b: 0.25111246, a: 0}
-    - _RippleColor: {r: 0.38176942, g: 1.2068545, b: 1.6517369, a: 0}
-    - _Water_Color: {r: 0.8537736, g: 0.9423956, b: 1, a: 0}
+    - _RippleColor: {r: 0.4528302, g: 0.4528302, b: 0.4528302, a: 0}
+    - _Water_Color: {r: 0.8457191, g: 0.9280067, b: 0.990566, a: 0}
   m_BuildTextureStacks: []
