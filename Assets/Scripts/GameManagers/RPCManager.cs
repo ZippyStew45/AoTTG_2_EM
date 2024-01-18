@@ -244,5 +244,18 @@ namespace GameManagers
         {
             PhotonView = GetComponent<PhotonView>();
         }
+
+        #region EXPEDITION EXTENSION RPCS
+
+        [PunRPC]
+        public void CollectEmblemRPC(BoxCollider collider, MeshRenderer obj, AudioSource audio, ParticleSystem ps,PhotonMessageInfo info)
+        {
+            Destroy(collider);
+            Destroy(obj);
+            audio.Play();
+            ps.Play();
+        }
+        #endregion
+
     }
 }

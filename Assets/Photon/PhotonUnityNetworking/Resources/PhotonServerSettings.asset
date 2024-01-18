@@ -115,6 +115,9 @@ MonoBehaviour:
   - Explode
   - PlayChargeEffectRPC
   - StopChargeEffectRPC
+  - CollectEffect
+  - CollectEffectRPC
+  - CollectEmblemRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

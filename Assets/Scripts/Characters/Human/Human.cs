@@ -4,6 +4,7 @@ using Controllers;
 using CustomLogic;
 using CustomSkins;
 using Effects;
+using GameManagers;
 using GameProgress;
 using Map;
 using Photon.Pun;
