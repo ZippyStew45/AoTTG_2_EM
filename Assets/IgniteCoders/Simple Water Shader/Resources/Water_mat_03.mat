@@ -37,7 +37,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - Texture2D_28de85506601443d82b6148f21ccc69c:
-        m_Texture: {fileID: 8400000, guid: 4ae8ae7350b67b44785d874c413a2e03, type: 2}
+        m_Texture: {fileID: 2800000, guid: 2c93b54a9ce1c314b809b4c11cf9cdb6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_6d0f902902b04ba687ee00a51db7ba6d:
@@ -66,25 +66,25 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - Boolean_d3c978b0d14a4f66be175a9b89855be0: 0
-    - Vector1_55003dfa023448c3bffa42f3ca4a99a4: -0.08
+    - Boolean_d3c978b0d14a4f66be175a9b89855be0: 1
+    - Vector1_55003dfa023448c3bffa42f3ca4a99a4: -2.52
     - Vector1_6269b1025b26473ca8bc61634f34b537: 0.899
-    - Vector1_687f54e8c371429f86b9eaab0e7dfe3e: 0.259
-    - Vector1_6c82dffdd68049bcb019d3a9c64c92a0: 0.025
+    - Vector1_687f54e8c371429f86b9eaab0e7dfe3e: 0.083
+    - Vector1_6c82dffdd68049bcb019d3a9c64c92a0: 0.03
     - Vector1_6f56a0970372485390c6587863c2374e: -11.86
     - Vector1_7273530c27a34c9f8ee5723b84f96baa: 1.38
-    - Vector1_dada42ebfac44076897b6de67441ba32: 0.3
-    - _Ambient_Occlusion: 0.25
+    - Vector1_dada42ebfac44076897b6de67441ba32: 0.73
+    - _Ambient_Occlusion: 0.255
     - _Foam_Density: 580.99
     - _Foam_Slimness: 9.3
     - _Foam_Speed: 1
-    - _Horizon_Distance: 9.2
+    - _Horizon_Distance: 30.17
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
-    - Color_36218622185947c6a5ae36366d8e21d8: {r: 0.56470275, g: 0.7218456, b: 0.8490566, a: 0.8352941}
-    - Color_93e06cd551a5449091bcde90b46765a0: {r: 0.70598966, g: 0.88088477, b: 0.8962264, a: 0.49803922}
-    - Vector2_4351ac2be1d74054986ec5378db9d578: {r: 8, g: 8, b: 0, a: 0}
+    - Color_36218622185947c6a5ae36366d8e21d8: {r: 0.3495016, g: 0.49410507, b: 0.6226415, a: 0.8156863}
+    - Color_93e06cd551a5449091bcde90b46765a0: {r: 1, g: 1, b: 1, a: 0}
+    - Vector2_4351ac2be1d74054986ec5378db9d578: {r: 20, g: 20, b: 0, a: 0}
     - _Foam_Color: {r: 1, g: 1, b: 1, a: 0}
-    - _Horizon_Color: {r: 0, g: 0.13896546, b: 0.1792453, a: 1}
+    - _Horizon_Color: {r: 0.01713244, g: 0.39832112, b: 0.5188679, a: 1}
   m_BuildTextureStacks: []
