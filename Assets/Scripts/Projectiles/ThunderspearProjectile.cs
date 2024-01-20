@@ -209,6 +209,7 @@ namespace Projectiles
                 if (!attached)
                 {
                     GetComponent<Rigidbody>().velocity *= 0.94f; //added by Sysyfus Dec 6 2023 to simulate wind resistance
+                    FixedUpdateInWater(); //added by Sysyfus Jan 9 2024
                     if (gravity)
                         GetComponent<Rigidbody>().velocity -= new Vector3(0f, 3.2f, 0f); //added by Sysyfus Dec 6 2023 to simulate gravity
 

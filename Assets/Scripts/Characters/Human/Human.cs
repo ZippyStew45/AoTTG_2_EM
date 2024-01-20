@@ -38,7 +38,7 @@ namespace Characters
         public static LayerMask AimMask = PhysicsLayer.GetMask(PhysicsLayer.TitanPushbox, PhysicsLayer.MapObjectProjectiles,
            PhysicsLayer.MapObjectEntities, PhysicsLayer.MapObjectAll);
         public static LayerMask ClipMask = PhysicsLayer.GetMask(PhysicsLayer.MapObjectAll, PhysicsLayer.MapObjectCharacters,
-            PhysicsLayer.MapObjectEntities);
+            PhysicsLayer.MapObjectEntities, PhysicsLayer.WaterVolume); //changed by Sysyfus 011924 to include WaterVolume
 
         // state
         private HumanState _state = HumanState.Idle;
@@ -83,7 +83,7 @@ namespace Characters
         private Vector3 _currentVelocity;
 
         public override LayerMask GroundMask => PhysicsLayer.GetMask(PhysicsLayer.TitanPushbox, PhysicsLayer.MapObjectEntities,
-            PhysicsLayer.MapObjectAll);
+            PhysicsLayer.MapObjectAll, PhysicsLayer.WaterVolume); //changed by Sysyfus Jan 19 2024 to include WaterVolume
 
         // actions
         public string StandAnimation;
@@ -1327,6 +1327,8 @@ namespace Characters
                 FixedUpdateBodyLean();
                 FixedUpdateClippingCheck();
                 ReelInAxis = 0f;
+                FixedUpdateInWater(); //added by Sysyfus Jan 9 2024
+                FixedUpdateStandStill(gravity); //added by Sysyfus Jan 19 2024
             }
         }
 
@@ -1772,6 +1774,7 @@ namespace Characters
                 CurrentGas = MaxGas;
             SetAcceleration(set.Acceleration.Value);
             SetRunSpeed(set.Speed.Value);
+            waterSpeed = RunSpeed / 2f; //added by Sysyfus Jan 11 2024
             bool male = Setup.CustomSet.Sex.Value == (int)HumanSex.Male;
             RunAnimation = HumanAnimations.Run;
             if (Setup.Weapon == HumanWeapon.AHSS || Setup.Weapon == HumanWeapon.APG)

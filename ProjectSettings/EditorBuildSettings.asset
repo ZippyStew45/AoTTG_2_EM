@@ -14,5 +14,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BiomeTestScene.unity
     guid: 0b55ef9c8914eca458fade84e81f93da
+  - enabled: 1
+    path: Assets/Scenes/Sysyfus/WaterTestScene.unity
+    guid: d9d8d3e57668f084788cd94e16523a41
+  - enabled: 1
+    path: Assets/Scenes/Sysyfus/WaterBox.unity
+    guid: 585ad386ed2a69247afb50198b0e43e8
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

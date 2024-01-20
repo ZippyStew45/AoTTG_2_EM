@@ -16,7 +16,7 @@
         public BoolSetting AllowShifterSpecials = new BoolSetting(true);
         public BoolSetting AllowShifters = new BoolSetting(false);
         public BoolSetting Horses = new BoolSetting(false);
-        public FloatSetting HorseSpeed = new FloatSetting(50f, minValue: 1f);
+        public FloatSetting HorseSpeed = new FloatSetting(45f, minValue: 1f); //changed by Sysyfus from 50f to 45f Jan 19 2024
         public BoolSetting GunsAirReload = new BoolSetting(true);
         public BoolSetting AllowStock = new BoolSetting(true);
         public BoolSetting ClearKDROnRestart = new BoolSetting(false);

@@ -1,5 +1,6 @@
 ﻿using ApplicationManagers;
 using CustomLogic;
+using GameManagers;
 using Map;
 using Photon.Pun;
 using Settings;
@@ -10,7 +11,7 @@ using Utility;
 
 namespace Characters
 {
-    class Hook : MonoBehaviour
+    internal partial class Hook : MonoBehaviour
     {
         public HookState State = HookState.Disabled;
         public Transform Anchor;
@@ -262,6 +263,7 @@ namespace Characters
         {
             if (_owner.IsMine())
             {
+                FixedUpdateInWater(); //added by Sysyfus Jan 9 2024
                 _hookPosition += _baseVelocity * Time.deltaTime * 50f + _relativeVelocity * Time.deltaTime;
                 Vector3 start = _nodes[_nodes.Count - 1];
                 if (_nodes.Count > 1)
