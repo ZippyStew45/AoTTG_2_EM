@@ -36,6 +36,15 @@ namespace Characters
             }
         }
 
+        public void FixedUpdateStandStill(Vector3 gravity) //Added by Sysyfus Jan 19 2024 so characters can stand still and not slide down slopes they can stand on
+        {
+            if (CanJump() && Cache.Animation.IsPlaying(StandAnimation) && Cache.Rigidbody.velocity.magnitude < 1f)
+            {
+                Vector3 inverseGravity = -gravity * Mathf.Clamp(((Cache.Rigidbody.velocity.magnitude - 0.8f) / -0.55f), 0f, 1f);
+                Cache.Rigidbody.AddForce(inverseGravity);
+            }
+        }
+
         private void OnTriggerEnter(Collider other)
         {
             //Added by Momo to check for Survey Point collision on 18th january 2024

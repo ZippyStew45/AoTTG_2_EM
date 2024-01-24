@@ -1327,6 +1327,7 @@ namespace Characters
                 FixedUpdateSetHookedDirection();
                 FixedUpdateBodyLean();
                 FixedUpdateClippingCheck();
+                FixedUpdateStandStill(gravity);
                 ReelInAxis = 0f;
             }
         }
