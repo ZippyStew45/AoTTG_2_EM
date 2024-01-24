@@ -32,18 +32,18 @@ namespace Cameras
             Camera.farClipPlane = SettingsManager.MapEditorSettings.RenderDistance.Value;
         }
 
-        protected void CreateUICamera()
-        {
-            _uiCamera = Util.CreateObj<Camera>();
-            _uiCamera.clearFlags = CameraClearFlags.Depth;
-            _uiCamera.cullingMask = PhysicsLayer.GetMask(PhysicsLayer.UI);
-            _uiCamera.depth = 1;
-            _uiCamera.fieldOfView = 60f;
-            var canvas = _menu.GetComponent<Canvas>();
-            canvas.renderMode = RenderMode.ScreenSpaceCamera;
-            canvas.worldCamera = _uiCamera;
-            canvas.planeDistance = 335.1518f;
-        }
+        //protected void CreateUICamera()
+        //{
+        //    _uiCamera = Util.CreateObj<Camera>();
+        //    _uiCamera.clearFlags = CameraClearFlags.Depth;
+        //    _uiCamera.cullingMask = PhysicsLayer.GetMask(PhysicsLayer.UI);
+        //    _uiCamera.depth = 1;
+        //    _uiCamera.fieldOfView = 60f;
+        //    var canvas = _menu.GetComponent<Canvas>();
+        //    canvas.renderMode = RenderMode.ScreenSpaceCamera;
+        //    canvas.worldCamera = _uiCamera;
+        //    canvas.planeDistance = 335.1518f;
+        //}
 
         protected void Update()
         {
@@ -98,7 +98,7 @@ namespace Cameras
         protected override void SetDefaultCameraPosition()
         {
             _menu = (MapEditorMenu)UIManager.CurrentMenu;
-            CreateUICamera();
+            //CreateUICamera();
             GameObject go = MapManager.GetRandomTag(MapTags.CameraSpawnPoint);
             if (go != null)
             {
