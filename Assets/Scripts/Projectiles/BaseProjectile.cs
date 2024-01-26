@@ -9,7 +9,7 @@ using Photon.Pun;
 
 namespace Projectiles
 {
-    class BaseProjectile: BaseMovementSync
+    partial class BaseProjectile: BaseMovementSync
     {
         protected BaseCharacter _owner;
         protected float _timeLeft;

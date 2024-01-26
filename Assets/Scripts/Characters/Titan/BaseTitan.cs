@@ -16,7 +16,7 @@ using Photon.Realtime;
 //edited by sysyfus dec 27 2023
 namespace Characters
 {
-    abstract class BaseTitan : BaseCharacter
+    abstract partial class BaseTitan : BaseCharacter
     {
         public TitanState State;
         public BaseTitanComponentCache BaseTitanCache;
@@ -498,6 +498,7 @@ namespace Characters
                     Cache.Transform.position += v;
                 }
                 Cache.Rigidbody.AddForce(Gravity, ForceMode.Acceleration);
+                FixedUpdateInWater();
             }
         }
 

@@ -22,7 +22,7 @@ using Weather;
 namespace Characters
 {
 
-    internal class Human : BaseCharacter
+    internal partial class Human : BaseCharacter
     {
         // setup
         public HumanComponentCache HumanCache;
@@ -1331,6 +1331,7 @@ namespace Characters
                 FixedUpdateSetHookedDirection();
                 FixedUpdateBodyLean();
                 FixedUpdateClippingCheck();
+                FixedUpdateInWater();
                 FixedUpdateStandStill(gravity);
                 ReelInAxis = 0f;
             }
@@ -1778,6 +1779,7 @@ namespace Characters
                 CurrentGas = MaxGas;
             SetAcceleration(set.Acceleration.Value);
             SetRunSpeed(set.Speed.Value);
+            waterSpeed = RunSpeed / 2f; //added by Sysyfus Jan 11 2024
             bool male = Setup.CustomSet.Sex.Value == (int)HumanSex.Male;
             RunAnimation = HumanAnimations.Run;
             if (Setup.Weapon == HumanWeapon.AHSS || Setup.Weapon == HumanWeapon.APG)
@@ -2597,6 +2599,25 @@ namespace Characters
                 collider.enabled = false;
                 RPCManager.PhotonView.RPC("CollectEmblemRPC", RpcTarget.AllViaServer, collider, obj, audio, ps);
             }
+            #region Bounce on water surface
+            //Added by Sysyfus Jan 11 2024
+            if (photonView.IsMine && other.gameObject.layer == LayerMask.NameToLayer("WaterVolume"))
+            {
+                if (Cache.Rigidbody.velocity.magnitude > 35f && timeSinceLastBounce > 0.25f)
+                {
+                    float horiSpeed = Mathf.Pow((Cache.Rigidbody.velocity.x * Cache.Rigidbody.velocity.x) + (Cache.Rigidbody.velocity.z * Cache.Rigidbody.velocity.z), 0.5f);
+                    float vertSpeed = Mathf.Abs(Cache.Rigidbody.velocity.y);
+
+                    //  check for 'shallow' angle of impact              check if falling
+                    if (horiSpeed > /*1.1547f * */ vertSpeed && Cache.Rigidbody.velocity.y < 0f)
+                    {
+                        Cache.Rigidbody.velocity = new Vector3(Cache.Rigidbody.velocity.x * 0.6f, (vertSpeed * 0.08f) + horiSpeed * 0.05f + 2f, Cache.Rigidbody.velocity.z * 0.6f);
+                        timeSinceLastBounce = 0f;
+                    }
+                }
+            }
+
+            #endregion
         }
 
         #endregion

@@ -16,7 +16,7 @@ using GameProgress;
 
 namespace Characters
 {
-    class BaseCharacter: Photon.Pun.MonoBehaviourPunCallbacks
+    partial class BaseCharacter: Photon.Pun.MonoBehaviourPunCallbacks
     {
         protected virtual int DefaultMaxHealth => 1;
         protected virtual bool HasMovement => true;

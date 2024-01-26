@@ -7,7 +7,7 @@ using Photon.Pun;
 
 namespace Characters
 {
-    class Horse: BaseCharacter
+    partial class Horse: BaseCharacter
     {
         Human _owner;
         HorseComponentCache HorseCache;
@@ -173,7 +173,7 @@ namespace Characters
                 if (_owner == null || _owner.Dead)
                     return;
                 CheckGround();
-                if (Grounded)
+                if (Grounded || isInWater) //changed by Sysyfus Jan 10 2024 to enable horse swimming
                 {
                     if (State == HorseState.ControlledIdle || State == HorseState.Idle)
                     {
@@ -202,6 +202,26 @@ namespace Characters
                                 Cache.Rigidbody.AddForce((Mathf.Max(speed - Cache.Rigidbody.velocity.magnitude, -1f)) * Cache.Rigidbody.velocity.normalized, ForceMode.VelocityChange);
                         }
                     }
+                    else //block added by Sysyfus Jan 19 2024 because no horse control in air feels bad, so get 1/4 strength control
+                    {
+                        if (State == HorseState.WalkToPoint || State == HorseState.RunToPoint ||
+                            State == HorseState.ControlledWalk || State == HorseState.ControlledRun)
+                        {
+                            float speed = RunSpeed;
+                            if (State == HorseState.ControlledWalk)
+                                speed = WalkSpeed;
+                            else if (State == HorseState.WalkToPoint)
+                                speed = RunCloseSpeed;
+                            Cache.Rigidbody.AddForce(Cache.Transform.forward * RunSpeed * 0.25f, ForceMode.Acceleration);
+                            if (Cache.Rigidbody.velocity.magnitude >= speed)
+                            {
+                                if (speed == RunSpeed)
+                                    Cache.Rigidbody.AddForce((speed - Cache.Rigidbody.velocity.magnitude) * Cache.Rigidbody.velocity.normalized, ForceMode.VelocityChange);
+                                else
+                                    Cache.Rigidbody.AddForce((Mathf.Max(speed - Cache.Rigidbody.velocity.magnitude, -1f)) * Cache.Rigidbody.velocity.normalized, ForceMode.VelocityChange);
+                            }
+                        }
+                    }
                 }
                 Cache.Rigidbody.AddForce(Gravity, ForceMode.Acceleration);
             }
@@ -227,6 +247,10 @@ namespace Characters
                     if (_owner.MountState == HumanMountState.Horse)
                         _owner.CrossFadeIfNotPlaying(HumanAnimations.HorseIdle, 0.1f);
                     _idleTimeLeft = 0f;
+                }
+                else if (isInWater) //block added by Sysyfus Jan 19 2024 so horse looks like it is paddling to stay afloat
+                {
+                    CrossFadeIfNotPlaying(HorseAnimations.Walk, 0.1f);
                 }
                 else
                 {
