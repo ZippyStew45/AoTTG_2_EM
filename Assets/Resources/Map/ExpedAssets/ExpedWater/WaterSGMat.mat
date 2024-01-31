@@ -79,7 +79,7 @@ Material:
     - _Refraction_Strength: 0.005
     m_Colors:
     - _Deep_Color: {r: 0.27772334, g: 0.48153132, b: 0.745283, a: 0.8862745}
-    - _Horizon_Color: {r: 0.40334642, g: 0.65233326, b: 0.8301887, a: 0}
+    - _Horizon_Color: {r: 0.6509804, g: 1, b: 0.8668246, a: 0}
     - _Intersection_Foam_Color: {r: 0.995283, g: 0.99669814, b: 1, a: 1}
     - _Intersection_Foam_Direction: {r: 0.01, g: 0.01, b: 0, a: 0}
     - _Intersection_Foam_Tiling: {r: 5, g: 5, b: 0, a: 0}
