@@ -455,8 +455,8 @@ namespace Characters
         {
             if (IsMine())
             {
-                CheckGround();
-                CheckUnderTerrain(); //added by Sysyfus Dec 27 2023
+                if(!isInWater) //check added by Sysyfus Jan 26 2024
+                    CheckGround();
                 if (State == TitanState.Jump)
                 {
                     if (Cache.Rigidbody.velocity.y <= 0f)
@@ -484,6 +484,26 @@ namespace Characters
                             Cache.Rigidbody.velocity += Cache.Transform.forward * WalkSpeed * Size;
                     }
                 }
+                else if (isInWater) //block added by Sysyfus Jan 26 2024
+                {
+                    if (State != TitanState.Jump)
+                    {
+                        Cache.Rigidbody.velocity = Vector3.down * 100f;
+                    }
+                    LastTargetDirection = Vector3.zero;
+                    if (Cache.Rigidbody.velocity.y >= 0f && State == TitanState.Fall)
+                    {
+                        LandNoVFX();
+                    }
+                    else if (HasDirection && (State == TitanState.Run || State == TitanState.Walk))
+                    {
+                        LastTargetDirection = GetTargetDirection();
+                        if (State == TitanState.Run)
+                            Cache.Rigidbody.velocity += Cache.Transform.forward * RunSpeed * Size * 0.5f;
+                        else if (State == TitanState.Walk)
+                            Cache.Rigidbody.velocity += Cache.Transform.forward * WalkSpeed * Size * 0.5f;
+                    }
+                }
                 if (_needFreshCoreDiff)
                 {
                     _oldCoreDiff = Cache.Transform.position - BaseTitanCache.Core.position;
@@ -497,8 +517,10 @@ namespace Characters
                     _oldCoreDiff = coreDiff;
                     Cache.Transform.position += v;
                 }
-                Cache.Rigidbody.AddForce(Gravity, ForceMode.Acceleration);
                 FixedUpdateInWater();
+                if (!shoulderIsInWater) //check added by Sysyfus Jan 26 2024
+                    Cache.Rigidbody.AddForce(Gravity, ForceMode.Acceleration);
+                CheckUnderTerrain(); //added by Sysyfus Dec 27 2023
             }
         }
 
@@ -557,17 +579,22 @@ namespace Characters
             }
         }
 
-        //added by Sysyfus Dec 27 2023
+        //CheckUnderTerrain and associated variables added by Sysyfus Dec 27 2023, updated by Sysyfus Feb 1 2024 to 
         private float terrainchecktime = 0f;
+        private RaycastHit[] groundCheckArray; //added by Sysyfus Feb 1 2024
+        private float height;
         private void CheckUnderTerrain()
         {
             terrainchecktime -= Time.deltaTime;
             if (terrainchecktime <= 0)
             {
-                var hitArr = Physics.RaycastAll(Cache.Transform.position + (Vector3.up * 50f), Vector3.down, 49f);
-                if (hitArr.Length > 0)
+                //groundCheckArray = Physics.RaycastAll(Cache.Transform.position + (Vector3.up * 50f), Vector3.down, 49f, PhysicsLayer.GetMask(23), QueryTriggerInteraction.Ignore);
+                groundCheckArray = Physics.RaycastAll(Cache.Transform.position + Vector3.up * height, Vector3.down, height - 1f, PhysicsLayer.GetMask(23), QueryTriggerInteraction.Ignore);
+                //RaycastHit hit1;
+                if (groundCheckArray.Length > 0)
+                //if(Physics.Raycast(Cache.Transform.position + Vector3.up * 50f, Vector3.down, out hit1, 49f, PhysicsLayer.GetMask(23), QueryTriggerInteraction.Ignore))
                 {
-                    foreach (RaycastHit hit in hitArr)
+                    foreach (RaycastHit hit in groundCheckArray)
                     {
                         if (hit.collider.GetComponent<TerrainCollider>() != null)
                         {
@@ -576,13 +603,13 @@ namespace Characters
                             if (newpos.ToString().Contains("NaN") == false && (newpos - Cache.Transform.position).magnitude < 50f)
                             {
                                 Cache.Transform.position = newpos;
-                                terrainchecktime = 10f;
                             }
 
                             break;
                         }
                     }
                 }
+                terrainchecktime = 0.5f;
             }
         }
 
@@ -611,6 +638,7 @@ namespace Characters
             transform.localScale = new Vector3(size, size, size);
             Size = size;
             SetSizeParticles(size);
+            height = size * 17f; //added by Sysyfus Feb 1 2024
         }
 
         protected virtual void SetSizeParticles(float size)

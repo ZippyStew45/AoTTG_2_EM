@@ -1,5 +1,6 @@
 using ApplicationManagers;
 using Characters;
+using Effects;
 using GameManagers;
 using Photon.Realtime;
 using Settings;
@@ -7,6 +8,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UIElements;
 using Utility;
 using static UnityEngine.EventSystems.StandaloneInputModule;
@@ -20,44 +23,20 @@ namespace Characters
     {
 
         public bool isInWater = false;
-
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.gameObject.layer == LayerMask.NameToLayer("WaterVolume"))
-            {
-                isInWater = true;
-            }
-        }
-        private void OnTriggerStay(Collider other)
-        {
-            if(other.gameObject.layer == LayerMask.NameToLayer("WaterVolume"))
-            {
-                isInWater = true;
-            }
-        }
-        private void OnTriggerExit(Collider other)
-        {
-            if (other.gameObject.layer == LayerMask.NameToLayer("WaterVolume"))
-            {
-                isInWater = false;
-            }
-        }
+        public Collider[] waterColliders = new Collider[1];
+        public int numWaterColliders = 0;
+        public bool shoulderIsInWater = false;
 
         public virtual void FixedUpdateInWater()
         {
-            var colliders = Physics.OverlapSphere(this.transform.position + Vector3.up * 0.8f, 0.4f);
-            if (colliders.Length > 0 && isInWater)
+            isInWater = false;
+
+            int numWaterColliders = Physics.OverlapSphereNonAlloc(this.transform.position + Vector3.up * 0.8f, 0.4f, waterColliders, (1 << 28));
+            if (numWaterColliders > 0)
             {
-                isInWater = false;
-                foreach (Collider collider in colliders)
-                {
-                    if (collider.gameObject.layer == LayerMask.NameToLayer("WaterVolume"))
-                    {
-                        isInWater = true;
-                        break;
-                    }
-                }
+                isInWater = true;
             }
+
             if (isInWater)
             {
                 GetComponent<Rigidbody>().velocity *= 0.954992586021f; //0.978267385729 reduce speed by 2/3 per second 0.954992586021 90% per sec
@@ -66,32 +45,14 @@ namespace Characters
 
     }
 
+
+    //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
     internal partial class Human : BaseCharacter
     {
         float timeSinceLastBounce = 0f;
         float waterSpeed;
-        //private void OnTriggerEnter(Collider other)
-        //{
-        //    #region Bounce on water surface
 
-        //    if(photonView.IsMine && other.gameObject.layer == LayerMask.NameToLayer("WaterVolume"))
-        //    {
-        //        if (Cache.Rigidbody.velocity.magnitude > 35f && timeSinceLastBounce > 0.25f)
-        //        {
-        //            float horiSpeed = Mathf.Pow((Cache.Rigidbody.velocity.x * Cache.Rigidbody.velocity.x) + (Cache.Rigidbody.velocity.z * Cache.Rigidbody.velocity.z), 0.5f);
-        //            float vertSpeed = Mathf.Abs(Cache.Rigidbody.velocity.y);
-
-                    //  check for 'shallow' angle of impact              check if falling
-         //           if (horiSpeed > /*1.1547f * */ vertSpeed && Cache.Rigidbody.velocity.y < 0f)
-         //           {
-         //               Cache.Rigidbody.velocity = new Vector3(Cache.Rigidbody.velocity.x * 0.6f, (vertSpeed * 0.08f) + horiSpeed * 0.05f + 2f, Cache.Rigidbody.velocity.z * 0.6f);
-         //               timeSinceLastBounce = 0f;
-         //           }
-         //       }
-         //   }
-
-         //   #endregion
-        //}
         public override void FixedUpdateInWater()
         {
             base.FixedUpdateInWater();
@@ -102,9 +63,9 @@ namespace Characters
             {
 
                 #region Floating
-                bool shoulderIsInWater = false;
+                shoulderIsInWater = false;
                 Transform shoulderpos = this.HumanCache.Neck;
-                var colliders2 = Physics.OverlapSphere(shoulderpos.position, 0.05f);
+                /*var colliders2 = Physics.OverlapSphere(shoulderpos.position, 0.05f);
                 if (colliders2.Length > 0)
                 {
                     foreach (Collider collider in colliders2)
@@ -115,6 +76,12 @@ namespace Characters
                             break;
                         }
                     }
+                }*/
+
+                numWaterColliders = Physics.OverlapSphereNonAlloc(shoulderpos.position, 0.05f, waterColliders, (1 << 28));
+                if (numWaterColliders > 0)
+                {
+                    shoulderIsInWater = true;
                 }
                 if (shoulderIsInWater)
                 {
@@ -151,13 +118,11 @@ namespace Characters
                 }
 
                 waterSpeed = this.RunSpeed / 2f;
-                //this.RunSpeed = waterSpeed;
                 if (num != 0f && num2 != 0f)
                 {
                     waterSpeed *= 0.707107f;
                 }
                 float upDown = Vector3.Dot(SceneLoader.CurrentCamera.Camera.transform.forward, Vector3.up);
-                //ChatManager.AddLine(upDown.ToString());
 
                 if (num > 0f)
                 {
@@ -179,6 +144,9 @@ namespace Characters
             }
         }
     }
+
+    //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
     internal partial class Horse : BaseCharacter
     {
         public override void FixedUpdateInWater()
@@ -194,14 +162,19 @@ namespace Characters
                 floatDepth += 0.1f;
             }
 
-            isInWater = false;
-            Collider[] hitColliders = Physics.OverlapSphere(this.transform.position + (Vector3.up * floatDepth), 0.05f);
+            shoulderIsInWater = false;
+            /*Collider[] hitColliders = Physics.OverlapSphere(this.transform.position + (Vector3.up * floatDepth), 0.05f);
             foreach (var hitCollider in hitColliders)
             {
                 if (hitCollider.gameObject.layer == LayerMask.NameToLayer("WaterVolume"))
                 {
-                    isInWater = true;
+                    shoulderIsInWater = true;
                 }
+            }*/
+            numWaterColliders = Physics.OverlapSphereNonAlloc(this.transform.position + (Vector3.up * floatDepth), 1f, waterColliders, (1 << 28));
+            if (numWaterColliders > 0)
+            {
+                shoulderIsInWater = true;
             }
 
             if (isInWater)
@@ -212,7 +185,8 @@ namespace Characters
                 }
 
                 Cache.Rigidbody.velocity *= 0.95f;
-                Cache.Rigidbody.velocity += Vector3.up * 0.7f;
+                if (shoulderIsInWater)
+                    Cache.Rigidbody.velocity += Vector3.up * 0.7f;
 
                 /* drowning
                 bool headIsInWater = false;
@@ -240,12 +214,16 @@ namespace Characters
         }
     }
 
+    //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
     internal partial class Hook : MonoBehaviour
     {
         bool isInWater = false;
+        Collider[] waterColliders = new Collider[1];
 
         public void FixedUpdateInWater()
         {
+            /*
             var colliders = Physics.OverlapSphere(_hookPosition, 0.05f);
             isInWater = false;
             if (colliders.Length > 0)
@@ -259,6 +237,13 @@ namespace Characters
                     }
                 }
             }
+            */
+            isInWater = false;
+            int numWaterColliders = Physics.OverlapSphereNonAlloc(_hookPosition, 0.05f, waterColliders, (1 << 28));
+            if (numWaterColliders > 0)
+            {
+                isInWater = true;
+            }
 
             if (isInWater)
             {
@@ -269,15 +254,49 @@ namespace Characters
         }
     }
 
+    //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
     abstract partial class BaseTitan : BaseCharacter
     {
         override public void FixedUpdateInWater()
         {
+            base.FixedUpdateInWater();
             if (isInWater)
             {
-                Cache.Rigidbody.velocity = new Vector3(Cache.Rigidbody.velocity.x * 0.5f, Cache.Rigidbody.velocity.y * 0.99f, Cache.Rigidbody.velocity.z * 0.5f);
-                Cache.Rigidbody.velocity += Vector3.up * 1.9f;
+                //Cache.Rigidbody.velocity = new Vector3(Cache.Rigidbody.velocity.x * 0.5f, Cache.Rigidbody.velocity.y * 0.99f, Cache.Rigidbody.velocity.z * 0.5f);
+                //Cache.Rigidbody.velocity += Vector3.up * 1.9f;
+                //Cache.Rigidbody.velocity += Vector3.up * 30f;
+
+                #region Floating
+                if (this.State != TitanState.Jump)
+                {
+                    shoulderIsInWater = false;
+                    Transform shoulderpos = this.BaseTitanCache.NapeHurtbox.transform;
+
+                    numWaterColliders = Physics.OverlapSphereNonAlloc(shoulderpos.position, 1f, waterColliders, (1 << 28));
+                    if (numWaterColliders > 0)
+                    {
+                        shoulderIsInWater = true;
+                    }
+
+                    if (shoulderIsInWater)
+                        Cache.Rigidbody.AddForce(-1.1f * Gravity, ForceMode.Acceleration);
+                    //if (shoulderIsInWater)
+                    //{
+                    //Cache.Rigidbody.AddForce(Vector3.up * 210f, ForceMode.Acceleration);
+                    //Cache.Rigidbody.velocity += Vector3.up * 110f;
+                    //ChatManager.AddLine("shoulderinwater");
+                    //}
+                    //else
+                    //ChatManager.AddLine("shouldernotinwater");
+                }
+                #endregion
             }
+        }
+
+        public virtual void LandNoVFX()
+        {
+            StateAction(TitanState.Land, BaseTitanAnimations.Land);
         }
     }
 
@@ -291,10 +310,11 @@ namespace Projectiles
     internal partial class BaseProjectile : BaseMovementSync
     {
         bool isInWater = false;
+        Collider[] waterColliders = new Collider[1];
 
         public void FixedUpdateInWater()
         {
-            var colliders = Physics.OverlapSphere(transform.position, 0.05f);
+            /*var colliders = Physics.OverlapSphere(transform.position, 0.05f);
             isInWater = false;
             if (colliders.Length > 0)
             {
@@ -306,6 +326,13 @@ namespace Projectiles
                         break;
                     }
                 }
+            }*/
+
+            isInWater = false;
+            int numWaterColliders = Physics.OverlapSphereNonAlloc(transform.position, 0.05f, waterColliders, (1 << 28));
+            if (numWaterColliders > 0)
+            {
+                isInWater = true;
             }
 
             if (isInWater)
@@ -317,4 +344,56 @@ namespace Projectiles
         }
     }
 
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+namespace Cameras
+{
+    partial class InGameCamera : BaseCamera
+    {
+        public bool isInWater = false;
+        Collider[] waterColliders = new Collider[1];
+
+        private void UpdateWater()
+        {
+            int numWaterColliders = Physics.OverlapSphereNonAlloc(Camera.transform.position, 0.05f, waterColliders, (1 << 28));
+            if (numWaterColliders > 0)
+            {
+                isInWater = true;
+            }
+            //if(isInWater)
+            //{
+                //ChatManager.AddLine(this.GameObject().layer.ToString());
+            //}
+            //else
+                //ChatManager.AddLine("Camera out of water");
+
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+public class UnderWaterRendererFeature : ScriptableRendererFeature
+{
+    public override void Create()
+    {
+
+    }
+
+    public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
+    {
+
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+public class UnderWaterRenderPass : ScriptableRenderPass
+{
+    public override void Execute(ScriptableRenderContext context, ref RenderingData renderingData)
+    {
+
+    }
 }

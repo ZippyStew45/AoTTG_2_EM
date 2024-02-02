@@ -24,6 +24,7 @@ namespace Utility
         public static int MapEditorObject = 25;
         public static int MapEditorGizmo = 26;
         public static int MinimapIcon = 27;
+        public static int WaterVolume = 28;
         private static Dictionary<int, LayerMask> _masks = new Dictionary<int, LayerMask>();
 
         public static void Init()
