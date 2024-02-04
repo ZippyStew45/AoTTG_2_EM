@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: GizmoMaterial
-  m_Shader: {fileID: 4800000, guid: 1c74397a306119f4b84e9b7f9d24a2d4, type: 3}
+  m_Shader: {fileID: 4800000, guid: 29966aba088c0294a9338a15a4a319a3, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -30,7 +30,10 @@ Material:
     m_Ints: []
     m_Floats:
     - _Outline: 0.022142857
+    - _OutlineWidth: 2
+    - _ZTest: 0
+    - _ZTest2: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _OutlineColor: {r: 1, g: 0, b: 0, a: 1}
+    - _OutlineColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
