@@ -231,7 +231,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 4f8ae3fe70ff3e146bebc125c6470470, type: 2}
     - target: {fileID: 919132149155446097, guid: fac02d480d0973d4ab40a3226610f729, type: 3}
       propertyPath: m_Name
-      value: PineTreeMomo 1
+      value: MomoPine1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: fac02d480d0973d4ab40a3226610f729, type: 3}
       propertyPath: m_Layer
