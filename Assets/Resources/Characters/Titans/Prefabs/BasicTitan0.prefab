@@ -195,6 +195,7 @@ MonoBehaviour:
   JustGrounded: 0
   TargetAngle: 0
   HasDirection: 0
+  isInWater: 0
   State: 0
   TitanColliderToggler: {fileID: 0}
   IsWalk: 0
