@@ -1180,7 +1180,6 @@ GameObject:
   - component: {fileID: 8136488909979317180}
   - component: {fileID: 3509639245281906913}
   - component: {fileID: 6696479363404272050}
-  - component: {fileID: 8422861581152389700}
   - component: {fileID: 2040093978865980035}
   m_Layer: 23
   m_Name: MomoHouse1
@@ -1257,29 +1256,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &8422861581152389700
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8324807873414025459}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fadcc2d9a34a1a34f93d4962ec37e6e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_data: {fileID: 11400000, guid: 474dff4024e5fab46a20c4c96e3db3bd, type: 2}
-  m_rootTransform: {fileID: 8136488909979317180}
-  m_lodGroup: {fileID: 2040093978865980035}
-  m_renderers:
-  - {fileID: 6696479363404272050}
-  m_lodReplacement: 3
-  m_renderPipelineInUse: 2
-  m_insertIndex: 0
-  m_lastImpostor: {fileID: 7283140340653635818}
-  m_folderPath: Assets/Resources/Map/ExpedAssets/ExpedModels/Impostors/
-  m_cutMode: 0
 --- !u!205 &2040093978865980035
 LODGroup:
   m_ObjectHideFlags: 0
