@@ -193,89 +193,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &3341125136015210879
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2672287382990021573}
-  - component: {fileID: 1349396132969573472}
-  - component: {fileID: 3845779325768898730}
-  m_Layer: 0
-  m_Name: PineTreeMomoLOD1
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2672287382990021573
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3341125136015210879}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.000000037748947, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5497821101129490988}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &1349396132969573472
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3341125136015210879}
-  m_Mesh: {fileID: -5495902117074765545, guid: 6d9d8d93d07c38b46b5822d4ebbaf115, type: 3}
---- !u!23 &3845779325768898730
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3341125136015210879}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 4f8ae3fe70ff3e146bebc125c6470470, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &4614757308238483465
 GameObject:
   m_ObjectHideFlags: 0
@@ -504,9 +421,6 @@ PrefabInstance:
       addedObject: {fileID: 4802424692174911356}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: fac02d480d0973d4ab40a3226610f729, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2672287382990021573}
-    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: fac02d480d0973d4ab40a3226610f729, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 5422679193584470707}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: fac02d480d0973d4ab40a3226610f729, type: 3}
       insertIndex: -1
@@ -532,20 +446,20 @@ LODGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5118340449060796566}
   serializedVersion: 2
-  m_LocalReferencePoint: {x: 0.30725813, y: 15.227054, z: -0.12652493}
+  m_LocalReferencePoint: {x: 0.29927444, y: 15.227054, z: 0.12347412}
   m_Size: 30.726625
   m_FadeMode: 1
   m_AnimateCrossFading: 1
   m_LastLODIsBillboard: 0
   m_LODs:
-  - screenRelativeHeight: 0.59683186
+  - screenRelativeHeight: 0.54805046
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 6631273327252445507}
-  - screenRelativeHeight: 0.3017836
+  - screenRelativeHeight: 0.20011063
     fadeTransitionWidth: 0
     renderers:
-    - renderer: {fileID: 3845779325768898730}
+    - renderer: {fileID: 6560079044411322844}
   - screenRelativeHeight: 0.006678818
     fadeTransitionWidth: 0
     renderers:
