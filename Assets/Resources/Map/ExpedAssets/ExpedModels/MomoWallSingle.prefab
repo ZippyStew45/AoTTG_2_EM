@@ -99,8 +99,8 @@ GameObject:
   - component: {fileID: 6053107085096442589}
   - component: {fileID: 7263488224890231586}
   m_Layer: 23
-  m_Name: Collision (2)
-  m_TagString: Untagged
+  m_Name: Collision
+  m_TagString: Collider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -153,7 +153,7 @@ GameObject:
   - component: {fileID: 6907136945220134820}
   m_Layer: 23
   m_Name: Collision
-  m_TagString: Untagged
+  m_TagString: Collider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -205,8 +205,8 @@ GameObject:
   - component: {fileID: 8551296722160757781}
   - component: {fileID: 4827281310900663970}
   m_Layer: 23
-  m_Name: Collision (4)
-  m_TagString: Untagged
+  m_Name: Collision
+  m_TagString: Collider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -258,8 +258,8 @@ GameObject:
   - component: {fileID: 8001042276875958800}
   - component: {fileID: 6748228584038133916}
   m_Layer: 23
-  m_Name: Collision (3)
-  m_TagString: Untagged
+  m_Name: Collision
+  m_TagString: Collider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -311,8 +311,8 @@ GameObject:
   - component: {fileID: 3336715822944113011}
   - component: {fileID: 6827236190399527981}
   m_Layer: 23
-  m_Name: Collision (1)
-  m_TagString: Untagged
+  m_Name: Collision
+  m_TagString: Collider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647

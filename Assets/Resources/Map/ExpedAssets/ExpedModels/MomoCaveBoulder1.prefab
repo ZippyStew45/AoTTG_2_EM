@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 482898888554836363}
   m_Layer: 23
   m_Name: MomoCaveBoulder1
-  m_TagString: Untagged
+  m_TagString: Collider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647

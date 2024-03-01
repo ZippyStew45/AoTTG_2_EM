@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 3035888190451040419}
   - component: {fileID: 880366286075340122}
   m_Layer: 23
-  m_Name: 1
-  m_TagString: Untagged
+  m_Name: Collision
+  m_TagString: Collider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -148,8 +148,8 @@ GameObject:
   - component: {fileID: 1804871183612810504}
   - component: {fileID: 2818131440002446955}
   m_Layer: 23
-  m_Name: AddonTower1SKPRoofCol
-  m_TagString: Untagged
+  m_Name: Collision
+  m_TagString: Collider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -321,8 +321,8 @@ GameObject:
   - component: {fileID: 3854859163220869372}
   - component: {fileID: 942034127293672408}
   m_Layer: 23
-  m_Name: 1 (1)
-  m_TagString: Untagged
+  m_Name: Collision
+  m_TagString: Collider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
